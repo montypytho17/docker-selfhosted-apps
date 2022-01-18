@@ -1,20 +1,12 @@
 # About
 
 <p align="center">
-<img src="../_utilities/wireguard.png" width="250" alt="wireguard" title="wireguard" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../_utilities/pihole.svg.png" width="100" alt="pihole" title="pihole" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../_utilities/unbound.svg" width="350" alt="unbound" title="unbound" />
 </p>
 
-Wireguard is a virtual private network (VPN), it provides you a secure, encrypted tunnel for online traffic and allow you to manage a remote private network.
 Pihole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software. Unbound is a validating, recursive, caching DNS resolver. 
-
-* Wireguard
-  * [Github](https://github.com/WireGuard)
-  * [Documentation](https://www.wireguard.com/quickstart/)
-  * [Docker Image](https://hub.docker.com/r/linuxserver/wireguard)
 
 * Pi-Hole
   * [Github](https://github.com/pi-hole/pi-hole)
@@ -42,7 +34,6 @@ Credits to [@IAmStoxe](https://github.com/IAmStoxe/wirehole).
 - [Usage](#usage)
     - [Requirements](#requirements)
     - [Configuration](#configuration)
-        - [Wireguard](#wireguard)
         - [Pihole](#pihole)
 - [Update](#update)
 - [Security](#security)
@@ -90,41 +81,6 @@ Links to the following [docker-compose.yml](docker-compose.yml) and the correspo
       networks:
         private_network:
           ipv4_address: 10.2.0.200
-      labels:
-        # Watchtower Update
-        - "com.centurylinklabs.watchtower.enable=true"
-
-
-    wireguard:
-      depends_on: [unbound, pihole]
-      image: linuxserver/wireguard
-      container_name: wireguard
-      restart: unless-stopped
-      cap_add:
-        - NET_ADMIN
-        - SYS_MODULE
-      environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-        - TZ=${TZ}
-        - SERVERPORT=51820
-        - SERVERURL=${SERVERURL} #optional
-        - PEERS=${PEERS} # How many peers to generate for you (clients)
-        - PEERDNS=10.2.0.100 # Set it to point to pihole
-        - INTERNAL_SUBNET=10.6.0.0
-      volumes:
-        - ./wireguard:/config
-        - /lib/modules:/lib/modules
-      ports:
-        - "51820:51820/udp"
-      dns:
-        - 10.2.0.100 # Points to pihole
-        - 10.2.0.200 # Points to unbound
-      sysctls:
-        - net.ipv4.conf.all.src_valid_mark=1
-      networks:
-        private_network:
-          ipv4_address: 10.2.0.3
       labels:
         # Watchtower Update
         - "com.centurylinklabs.watchtower.enable=true"
@@ -196,18 +152,6 @@ To find yours, use `id user`. Replace the environment variables in `.env` with y
 sudo docker-compose up -d
 ```
 
-### Wireguard
-
-* Getting the client configuration file
-
-You should be able to find the required configuration for your clients in the `wireguard` directory. Each client will have an associated folder called `peerX`.
-Inside this folder you can find a QR code for your smartphone as well as configuration file for your linux/windows.
-
-* Adding more clients
-
-If you want more clients, just change the value in the `.env` file and relaunch the service `sudo docker-compose up -d`.
-
-
 ### Pihole
 
 Once connected to the VPN you should be able to access the pihole admin interface at http://10.2.0.100/admin, for more information regarding pihole you can check the well written official pihole [documentation](https://docs.pi-hole.net/).
@@ -222,8 +166,6 @@ The images are automatically updated with [watchtower](../watchtower) thanks to 
 ```
 
 # Security
-
-A VPN is often a good solution to always have a dedicated IP. If you want to secure your others services, you can limit their access only when you are connected to your VPN. An easy way to do that is to add the private IP address range used by docker (172.16.0.0/12), your internal IP through the VPN will be one of this range, to the traefik [whitelist](traefik/rules/whitelist.yml).
 
 Keep in mind that only the containers that have the following label attached will be prone to this IP restriction.
 
