@@ -8,8 +8,6 @@ Guide with examples !
 
 * [traefik](traefik/) - reverse proxy and SSL manager
 * [borg-backup](borg-backup/) - backup scripts (local and AWS)
-* [fail2ban](fail2ban/) - security tool (ban IP)
-* [freshrss](freshrss/) - RSS feed aggregator
 * [gotify](gotify/) - notification service
 * [jellyfin](jellyfin/) - media System
 * [nextcloud](nextcloud/) - file-hosting software system
