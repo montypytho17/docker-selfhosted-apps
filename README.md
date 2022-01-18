@@ -7,7 +7,6 @@ Guide with examples !
 # Services
 
 * [traefik](traefik/) - reverse proxy and SSL manager
-* [borg-backup](borg-backup/) - backup scripts (local and AWS)
 * [nextcloud](nextcloud/) - file-hosting software system
 * [vaultwarden](vaultwarden/) - password manager
 * [watchtower](watchtower/) - automatic docker images update
