@@ -8,8 +8,6 @@ Guide with examples !
 
 * [traefik](traefik/) - reverse proxy and SSL manager
 * [borg-backup](borg-backup/) - backup scripts (local and AWS)
-* [gotify](gotify/) - notification service
-* [jellyfin](jellyfin/) - media System
 * [nextcloud](nextcloud/) - file-hosting software system
 * [seafile](seafile/) - file-hosting software system
 * [synapse-element](synapse-element/) - decentralised communication system
