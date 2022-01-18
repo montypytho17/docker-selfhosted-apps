@@ -9,8 +9,6 @@ Guide with examples !
 * [traefik](traefik/) - reverse proxy and SSL manager
 * [borg-backup](borg-backup/) - backup scripts (local and AWS)
 * [nextcloud](nextcloud/) - file-hosting software system
-* [seafile](seafile/) - file-hosting software system
-* [synapse-element](synapse-element/) - decentralised communication system
 * [vaultwarden](vaultwarden/) - password manager
 * [watchtower](watchtower/) - automatic docker images update
 * [webserver](webserver/) - simple apache webserver
