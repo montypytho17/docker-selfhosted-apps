@@ -15,8 +15,6 @@ Guide with examples !
 * [nextcloud](nextcloud/) - file-hosting software system
 * [seafile](seafile/) - file-hosting software system
 * [synapse-element](synapse-element/) - decentralised communication system
-* [transmission](transmission/) - fast, easy, and free BitTorrent client
-* [trilium](trilium/) - hierarchical note-taking application
 * [vaultwarden](vaultwarden/) - password manager
 * [watchtower](watchtower/) - automatic docker images update
 * [webserver](webserver/) - simple apache webserver
