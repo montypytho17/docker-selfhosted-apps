@@ -15,41 +15,6 @@ services:
       # Watchtower Update
       - "com.centurylinklabs.watchtower.enable=true"
 
-
-  wireguard:
-    depends_on: [unbound, pihole]
-    image: linuxserver/wireguard
-    container_name: wireguard
-    restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - SERVERPORT=51820
-      - SERVERURL=${SERVERURL} #optional
-      - PEERS=${PEERS} # How many peers to generate for you (clients)
-      - PEERDNS=10.2.0.100 # Set it to point to pihole
-      - INTERNAL_SUBNET=10.6.0.0
-    volumes:
-      - ./wireguard:/config
-      - /lib/modules:/lib/modules
-    ports:
-      - "51820:51820/udp"
-    dns:
-      - 10.2.0.100 # Points to pihole
-      - 10.2.0.200 # Points to unbound
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-    networks:
-      private_network:
-        ipv4_address: 10.2.0.3
-    labels:
-      # Watchtower Update
-      - "com.centurylinklabs.watchtower.enable=true"
-
   pihole:
     depends_on: [unbound]
     container_name: pihole
